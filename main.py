@@ -16,6 +16,7 @@ else:
     usrDir = f'/home/{user}/.local/share/cura/4.9/'
     os.chdir(f'/home/{user}/')
     os.system("./cura --appimage-extract")
+    os.chdir(f'/home/{user}/cura-setup')
     
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
 
