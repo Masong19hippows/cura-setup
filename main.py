@@ -41,17 +41,17 @@ with open(configDir + "cura.cfg",'r') as config_file:
 with open(configDir + "cura.cfg", "w") as new_file:    
     new_file.write(new_new)
 
-with zipfile.ZipFile(str(os.getcwd) + "definitions.zip","r") as zip_ref:
+with zipfile.ZipFile(os.getcwd() + "/definitions.zip","r") as zip_ref:
     zip_ref.extractall(mainDir + "defintions")
 
-with zipfile.ZipFile(str(os.getcwd) + "extruders.zip","r") as zip_ref:
+with zipfile.ZipFile(os.getcwd() + "/extruders.zip","r") as zip_ref:
     zip_ref.extractall(mainDir + "extruders")
 
-with zipfile.ZipFile(str(os.getcwd) + "QidiPrint.zip","r") as zip_ref:
+with zipfile.ZipFile(os.getcwd() + "/QidiPrint.zip","r") as zip_ref:
     zip_ref.extractall(usrDir + "plugins")
 
 if sys.platform == "linux":
     os.chdir("/home/{user}/cura-setup")
     os.system(f"./appimage -v /home/{user}/squashfs-root")
-    shutil.move(os.getcwd + "Cura-x86_64.AppImage", "~/cura")
+    shutil.move(os.getcwd() + "Cura-x86_64.AppImage", "~/cura")
     os.system("chmod +x ~/cura")
