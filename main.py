@@ -41,13 +41,13 @@ with open(configDir + "cura.cfg",'r') as config_file:
 with open(configDir + "cura.cfg", "w") as new_file:    
     new_file.write(new_new)
 
-with zipfile.ZipFile(os.join(os.getcwd + "definitions.zip"),"r") as zip_ref:
+with zipfile.ZipFile(os.path.join(os.getcwd + "definitions.zip"),"r") as zip_ref:
     zip_ref.extractall(mainDir + "defintions")
 
-with zipfile.ZipFile(os.join(os.getcwd + "extruders.zip"),"r") as zip_ref:
+with zipfile.ZipFile(os.path.join(os.getcwd + "extruders.zip"),"r") as zip_ref:
     zip_ref.extractall(mainDir + "extruders")
 
-with zipfile.ZipFile(os.join(os.getcwd + "QidiPrint.zip"),"r") as zip_ref:
+with zipfile.ZipFile(os.path.join(os.getcwd + "QidiPrint.zip"),"r") as zip_ref:
     zip_ref.extractall(usrDir + "plugins")
 
 if sys.platform == "linux":
