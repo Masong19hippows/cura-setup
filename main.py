@@ -14,7 +14,8 @@ else:
     mainDir = f'/home/{user}/squashfs-root/usr/bin/resources/'
     configDir = f'/home/{user}/.config/cura/4.9/'
     usrDir = f'/home/{user}/.local/share/cura/4.9/'
-    os.system("cd ~ & ./cura --appimage-extract")
+    os.chdir(f'/home/{user}/')
+    os.system("./cura --appimage-extract")
     
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
 
@@ -50,6 +51,7 @@ with zipfile.ZipFile("QidiPrint","r") as zip_ref:
     zip_ref.extractall(usrDir + "plugins")
 
 if sys.platform == "linux":
-    os.system(f"cd {os.getcwd()} & ./appimage -v /home/{user}/squashfs-root")
+    os.chdir("/home/{user}/cura-setup")
+    os.system(f"./appimage -v /home/{user}/squashfs-root")
     shutil.move(os.getcwd + "Cura-x86_64.AppImage", "~/cura")
     os.system("chmod +x ~/cura")
