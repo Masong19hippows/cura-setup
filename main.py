@@ -52,7 +52,6 @@ with zipfile.ZipFile(os.getcwd() + "/QidiPrint.zip","r") as zip_ref:
     zip_ref.extractall(usrDir + "plugins")
 
 if sys.platform == "linux":
-    os.chdir("/home/{user}/cura-setup")
     os.system(f"./appimage -v /home/{user}/squashfs-root")
     shutil.move(os.getcwd() + "Cura-x86_64.AppImage", "~/cura")
     os.system("chmod +x ~/cura")
