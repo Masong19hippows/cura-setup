@@ -17,7 +17,7 @@ else:
     os.chdir(f'/home/{user}/')
     os.system("./cura --appimage-extract")
     os.chdir(f'/home/{user}/cura-setup')
-    
+
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
 
 qidiVar = "\n[QidiPrint]\ninstances = " + '{\
@@ -39,11 +39,11 @@ with open(configDir + "cura.cfg",'r') as config_file:
     new = content.replace("[QidiPrint]", qidiVar)
     new_new = new.replace("[octoprint]", octoVar)
 
-with open(configDir + "cura.cfg", "w") as new_file:    
+with open(configDir + "cura.cfg", "w") as new_file:
     new_file.write(new_new)
 
 with zipfile.ZipFile(os.getcwd() + "/definitions.zip","r") as zip_ref:
-    zip_ref.extractall(mainDir + "defintions")
+    zip_ref.extractall(mainDir + "definitions")
 
 with zipfile.ZipFile(os.getcwd() + "/extruders.zip","r") as zip_ref:
     zip_ref.extractall(mainDir + "extruders")
@@ -55,3 +55,4 @@ if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
     shutil.move(os.getcwd() + "/Cura-x86_64.AppImage", f"/home/{user}/cura")
     os.system(f"chmod +x ~/cura")
+
