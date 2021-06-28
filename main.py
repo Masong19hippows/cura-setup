@@ -53,5 +53,5 @@ with zipfile.ZipFile(os.getcwd() + "/QidiPrint.zip","r") as zip_ref:
 
 if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
-    shutil.move(os.getcwd() + "/Cura-x86_64.AppImage", "~/cura")
-    os.system("chmod +x ~/cura")
+    shutil.move(os.getcwd() + "/Cura-x86_64.AppImage", f"/home/{user}/cura")
+    os.system(f"chmod +x ~/cura")
