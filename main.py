@@ -7,14 +7,14 @@ import urllib.request
 
 user = getpass.getuser()
 if os.name == 'nt':
-    usrDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9/'
-    mainDir = "C:/Program Files/Ultimaker Cura 4.9.0/resources/"
-    configDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9/'
+    usrDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9'
+    mainDir = "C:/Program Files/Ultimaker Cura 4.9.0/resources"
+    configDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9'
 else:
-    mainDir = f'/home/{user}/squashfs-root/usr/bin/resources/'
-    configDir = f'/home/{user}/.config/cura/4.9/'
-    usrDir = f'/home/{user}/.local/share/cura/4.9/'
-    os.chdir(f'/home/{user}/')
+    mainDir = f'/home/{user}/squashfs-root/usr/bin/resources'
+    configDir = f'/home/{user}/.config/cura/4.9'
+    usrDir = f'/home/{user}/.local/share/cura/4.9'
+    os.chdir(f'/home/{user}')
     os.system("./cura --appimage-extract")
     os.chdir(f'/home/{user}/cura-setup')
 
@@ -34,25 +34,17 @@ octoVar = "\n[octoprint]\n" + "manual_instances = " + '{\
 \nkeys_cache = eyJPY3RvLUhvbWUtRXh0ZXJuYWwiOiAiOTJFNTdBREI3N0IyNDUxNjhENzgxREQ0NjU2MjZDRDAifQ==\
 \nuse_zeroconf = False\n'
 
-with open(configDir + "cura.cfg",'r') as config_file:
-    content = config_file.read()
-    new = content.replace("[QidiPrint]", qidiVar)
-    new_new = new.replace("[octoprint]", octoVar)
+with open(os.path.join(configDir, "cura.cfg"), "a") as new_file:
+    new_file.write(octoVar + qidiVar)
 
-with open(configDir + "cura.cfg", "w") as new_file:
-    new_file.write(new_new)
+with zipfile.ZipFile(os.path.join(os.getcwd(), "definitions.zip"),"r") as zip_ref:
+    zip_ref.extractall(os.path.join(mainDir, "definitions"))
 
-with zipfile.ZipFile(os.getcwd() + "/definitions.zip","r") as zip_ref:
-    zip_ref.extractall(mainDir + "definitions")
-
-with zipfile.ZipFile(os.getcwd() + "/extruders.zip","r") as zip_ref:
-    zip_ref.extractall(mainDir + "extruders")
-
-with zipfile.ZipFile(os.getcwd() + "/QidiPrint.zip","r") as zip_ref:
-    zip_ref.extractall(usrDir + "plugins")
+with zipfile.ZipFile(os.path.join(os.getcwd(), "extruders.zip"),"r") as zip_ref:
+    zip_ref.extractall(os.path.join(mainDir, "extruders"))
 
 if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
-    shutil.move(os.getcwd() + "/Cura-x86_64.AppImage", f"/home/{user}/cura")
+    shutil.move(os.path.join(os.getcwd(), "Cura-x86_64.AppImage"), f"/home/{user}/cura")
     os.system(f"chmod +x ~/cura")
 
