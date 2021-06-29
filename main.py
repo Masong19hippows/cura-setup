@@ -13,6 +13,7 @@ if os.name == 'nt':
 else:
     mainDir = f'/home/{user}/squashfs-root/usr/bin/resources'
     configDir = f'/home/{user}/.config/cura/4.9'
+    os.system(f"mkdir -p {configDir}")
     usrDir = f'/home/{user}/.local/share/cura/4.9'
     os.chdir(f'/home/{user}')
     os.system("./cura --appimage-extract")
