@@ -48,4 +48,5 @@ if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
     shutil.move(os.path.join(os.getcwd(), "Cura-x86_64.AppImage"), f"/home/{user}/cura")
     os.system(f"chmod +x ~/cura")
+    os.system(f"rm -r {os.path.join(os.getcwd(), 'squashfs-root')}")
 
