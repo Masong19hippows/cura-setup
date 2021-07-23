@@ -4,17 +4,49 @@ import shutil
 import zipfile
 import getpass
 import urllib.request
+from packaging.version import parse as parse_version
 
+versionSet = []
 user = getpass.getuser()
 if os.name == 'nt':
-    usrDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9'
-    mainDir = "C:/Program Files/Ultimaker Cura 4.9.0/resources"
-    configDir = f'C:/Users/{user}/AppData/Roaming/cura/4.9'
+    compare = "0"
+    for f in os.listdir(f'C:/Users/{user}/AppData/Roaming/cura'):
+        if not f.startswith('st'):
+            versionSet.append(f)
+    for f in versionSet:
+        if parse_version(f) > parse_version(compare):
+            compare = f
+            version = f
+    if version.count('.') == 2:
+        programVersion = version
+    elif version.count('.') == 0:
+        programVersion = version + ".0.0"
+    else:
+        programVersion = version + ".0"
+
+    usrDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
+    mainDir = f'C:/Program Files/Ultimaker Cura {programVersion}/resources'
+    configDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
+    print(mainDir)
+
 else:
+    for f in os.listdir(f'/home/{user}/.config/cura'):
+        if not f.startswith('st'):
+            versionSet.append(f)
+    for f in versionSet:
+        if parse_version(f) > parse_version(compare):
+            compare = f
+            version = f
+    if version.count('.') == 2:
+        programVersion = version
+    elif version.count('.') == 0:
+        programVersion = version + ".0.0"
+    else:
+        programVersion = version + ".0"
+        
     mainDir = f'/home/{user}/squashfs-root/usr/bin/resources'
-    configDir = f'/home/{user}/.config/cura/4.9'
-    os.system(f"mkdir -p {configDir}")
-    usrDir = f'/home/{user}/.local/share/cura/4.9'
+    configDir = f'/home/{user}/.config/cura/{version}'
+    usrDir = f'/home/{user}/.local/share/cura/{version}'
     os.chdir(f'/home/{user}')
     os.system("./cura --appimage-extract")
     os.chdir(f'/home/{user}/cura-setup')
