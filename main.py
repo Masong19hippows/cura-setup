@@ -27,7 +27,6 @@ if os.name == 'nt':
     usrDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
     mainDir = f'C:/Program Files/Ultimaker Cura {programVersion}/resources'
     configDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
-    print(mainDir)
 
 else:
     for f in os.listdir(f'/home/{user}/.config/cura'):
