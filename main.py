@@ -4,7 +4,7 @@ import shutil
 import zipfile
 import getpass
 import urllib.request
-from packaging.version import parse as parse_version
+from distutils.version import LooseVersion
 
 versionSet = []
 user = getpass.getuser()
@@ -14,7 +14,7 @@ if os.name == 'nt':
         if not f.startswith('st'):
             versionSet.append(f)
     for f in versionSet:
-        if parse_version(f) > parse_version(compare):
+        if LooseVersion(f) > LooseVersion(compare):
             compare = f
             version = f
     if version.count('.') == 2:
@@ -27,7 +27,7 @@ if os.name == 'nt':
     usrDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
     mainDir = f'C:/Program Files/Ultimaker Cura {programVersion}/resources'
     configDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
-
+    print(mainDir)
 else:
     for f in os.listdir(f'/home/{user}/.config/cura'):
         if not f.startswith('st'):
