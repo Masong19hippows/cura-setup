@@ -64,6 +64,7 @@ octoVar = "\n[octoprint]\n" + "manual_instances = " + '{\
 "Octo-Home-Internal": \
 {"address": "192.168.1.169", "port": 80, "path": "/", "useHttps": false, "userName": "", "password": ""}} \
 \nkeys_cache = eyJPY3RvLUhvbWUtRXh0ZXJuYWwiOiAiOTJFNTdBREI3N0IyNDUxNjhENzgxREQ0NjU2MjZDRDAifQ==\
+\n1NjI2Q0QwIn0=\
 \nuse_zeroconf = False\n'
 
 with open(os.path.join(configDir, "cura.cfg"), "a") as new_file:
