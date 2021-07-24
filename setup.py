@@ -1,5 +1,3 @@
-import shutil
-import os
 from cx_Freeze import setup, Executable
 
 base = None    
@@ -15,9 +13,9 @@ options = {
 }
 
 setup(
-    name = "Cura-Setup",
+    name = "Cura-Setup-Main",
     options = options,
-    version = "4.9",
+    version = "5",
     description = 'Setting up cura',
     executables = executables,
 )
