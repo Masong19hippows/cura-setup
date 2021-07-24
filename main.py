@@ -24,7 +24,6 @@ if os.name == 'nt':
     else:
         programVersion = version + ".0"
 
-    usrDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
     mainDir = f'C:/Program Files/Ultimaker Cura {programVersion}/resources'
     configDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
 else:
@@ -44,7 +43,6 @@ else:
 
     mainDir = f'/home/{user}/squashfs-root/usr/bin/resources'
     configDir = f'/home/{user}/.config/cura/{version}'
-    usrDir = f'/home/{user}/.local/share/cura/{version}'
     os.chdir(f'/home/{user}')
     os.system("./cura --appimage-extract")
     os.chdir(f'/home/{user}/cura-setup')
@@ -75,8 +73,12 @@ with zipfile.ZipFile(os.path.join(os.getcwd(), "definitions.zip"),"r") as zip_re
 with zipfile.ZipFile(os.path.join(os.getcwd(), "extruders.zip"),"r") as zip_ref:
     zip_ref.extractall(os.path.join(mainDir, "extruders"))
 
-with zipfile.ZipFile(os.path.join(os.getcwd(), "details.zip"),"r") as zip_ref:
-    zip_ref.extractall(usrDir)
+with zipfile.ZipFile(os.path.join(os.getcwd(), "X-Plus_mesh.zip"),"r") as zip_ref:
+    zip_ref.extractall(os.path.join(mainDir, "meshes"))
+
+with zipfile.ZipFile(os.path.join(os.getcwd(), "X-plus_quality.zip"),"r") as zip_ref:
+    zip_ref.extractall(os.path.join(mainDir, "quality"))
+    
 if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
     shutil.move(os.path.join(os.getcwd(), "Cura-x86_64.AppImage"), f"/home/{user}/cura")
