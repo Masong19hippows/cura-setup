@@ -8,8 +8,8 @@ from packaging.version import parse as parse_version
 
 versionSet = []
 user = getpass.getuser()
+compare = "0"
 if os.name == 'nt':
-    compare = "0"
     for f in os.listdir(f'C:/Users/{user}/AppData/Roaming/cura'):
         if not f.startswith('st'):
             versionSet.append(f)
@@ -42,7 +42,7 @@ else:
         programVersion = version + ".0.0"
     else:
         programVersion = version + ".0"
-        
+
     mainDir = f'/home/{user}/squashfs-root/usr/bin/resources'
     configDir = f'/home/{user}/.config/cura/{version}'
     usrDir = f'/home/{user}/.local/share/cura/{version}'
