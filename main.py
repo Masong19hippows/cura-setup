@@ -33,7 +33,7 @@ else:
         if not f.startswith('st'):
             versionSet.append(f)
     for f in versionSet:
-        if parse_version(f) > parse_version(compare):
+        if LooseVersion(f) > LooseVersion(compare):
             compare = f
             version = f
     if version.count('.') == 2:
