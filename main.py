@@ -27,7 +27,6 @@ if os.name == 'nt':
     usrDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
     mainDir = f'C:/Program Files/Ultimaker Cura {programVersion}/resources'
     configDir = f'C:/Users/{user}/AppData/Roaming/cura/{version}'
-    print(mainDir)
 else:
     for f in os.listdir(f'/home/{user}/.config/cura'):
         if not f.startswith('st'):
@@ -76,6 +75,8 @@ with zipfile.ZipFile(os.path.join(os.getcwd(), "definitions.zip"),"r") as zip_re
 with zipfile.ZipFile(os.path.join(os.getcwd(), "extruders.zip"),"r") as zip_ref:
     zip_ref.extractall(os.path.join(mainDir, "extruders"))
 
+with zipfile.ZipFile(os.path.join(os.getcwd(), "details.zip"),"r") as zip_ref:
+    zip_ref.extractall(usrDir)
 if sys.platform == "linux":
     os.system(f"./appimagetool -v /home/{user}/squashfs-root")
     shutil.move(os.path.join(os.getcwd(), "Cura-x86_64.AppImage"), f"/home/{user}/cura")
