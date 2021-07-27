@@ -3,7 +3,7 @@ from cx_Freeze import setup, Executable
 base = None    
 
 executables = [Executable("main.py", base=base)]
-includefiles = ["definitions.zip", "extruders.zip"]
+includefiles = ["definitions.zip", "extruders.zip", "X-Plus_mesh.zip", "x-plus_quality.zip"]
 packages = ["os", "zipfile", "getpass", "urllib.request", "shutil", "sys", "packaging.version"]
 options = {
     'build_exe': {    
